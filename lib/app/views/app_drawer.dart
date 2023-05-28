@@ -45,24 +45,6 @@ class MainDrawer extends StatelessWidget {
                     );
                   },
                 ),
-                DrawerTile(
-                  Icons.contact_mail,
-                  "Contact Us",
-                  iconColor: Colors.green,
-                  onTap: () {
-                    Get.to(() => const ContactUsView());
-                  },
-                ),
-                DrawerTile(
-                  Icons.share,
-                  "Tell your friends",
-                  iconColor: Colors.red,
-                  onTap: () {
-                    String shareMessage =
-                        "Check out ${AppUtils.appName}! \n${AppUtils.appDescription} \n${AppUtils.pocketbaseUrl}";
-                    Share.share(shareMessage);
-                  },
-                ),
                 Obx(
                   () => DrawerTile(
                     Icons.dark_mode,
@@ -79,6 +61,24 @@ class MainDrawer extends StatelessWidget {
                           HomeController.to.isDarkMode.value;
                     },
                   ),
+                ),
+                DrawerTile(
+                  Icons.share,
+                  "Share App",
+                  iconColor: Colors.red,
+                  onTap: () {
+                    String shareMessage =
+                        "Check out ${AppUtils.appName}! \n${AppUtils.appDescription} \n${AppUtils.pocketbaseUrl}";
+                    Share.share(shareMessage);
+                  },
+                ),
+                DrawerTile(
+                  Icons.contact_mail,
+                  "Contact",
+                  iconColor: Colors.green,
+                  onTap: () {
+                    Get.to(() => const ContactUsView());
+                  },
                 ),
               ],
             ),

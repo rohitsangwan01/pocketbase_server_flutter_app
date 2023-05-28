@@ -3,6 +3,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
 import 'package:get/get.dart';
 import 'package:input_history_text_field/input_history_text_field.dart';
+import 'package:pocketbase_mobile_flutter/app/views/ui.dart';
 import 'package:pocketbase_mobile_flutter/pocketbase_mobile.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -45,10 +46,12 @@ class HomeView extends GetView<HomeController> {
             actions: [
               Obx(() => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.circle,
-                        color: controller.isRunning.value
-                            ? Colors.green
-                            : Colors.red),
+                    child: Icon(
+                      Icons.circle,
+                      color: controller.isRunning.value
+                          ? Colors.green
+                          : Colors.red,
+                    ),
                   )),
             ],
           ),
@@ -114,6 +117,26 @@ class HomeView extends GetView<HomeController> {
                       ElevatedButton(
                         onPressed: controller.stop,
                         child: const Text("Stop"),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Enable Api Logs"),
+                      Obx(
+                        () => Switch(
+                          value: controller.enablePocketbaseApiLogs.value,
+                          onChanged: (value) {
+                            controller.enablePocketbaseApiLogs.toggle();
+                            if (controller.isRunning.value) {
+                              UI.presentSuccess(
+                                "Restart Pocketbase to apply changes",
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

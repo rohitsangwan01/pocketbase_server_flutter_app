@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   final portEditingController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   RxBool isDarkMode = false.obs;
+  RxBool enablePocketbaseApiLogs = true.obs;
 
   @override
   void onInit() {
@@ -38,7 +39,7 @@ class HomeController extends GetxController {
       await PocketbaseMobileFlutter.start(
         hostName: hostnameEditingController.text,
         port: portEditingController.text,
-        enablePocketbaseApiLogs: true,
+        enablePocketbaseApiLogs: enablePocketbaseApiLogs.value,
       );
       isRunning.value = true;
     } catch (e) {
@@ -75,18 +76,30 @@ class HomeController extends GetxController {
     );
   }
 
+  void openAdminPanel() {
+    if (hostnameEditingController.text.isEmpty ||
+        portEditingController.text.isEmpty) {
+      UI.presentError("Please enter a hostname or port");
+      return;
+    }
+    if (!isRunning.value) {
+      UI.presentError("Please start Pocketbase first");
+      return;
+    }
+    Get.to(
+      () => AdminPanelView(adminPanelUrl: _adminUrl),
+      transition: Transition.cupertino,
+    );
+  }
+
+  String get _adminUrl =>
+      "http://${hostnameEditingController.text}:${portEditingController.text}/_/";
+
   void _initHostAndPort() async {
     hostnameEditingController.text =
         await PocketbaseMobileFlutter.localIpAddress ?? "127.0.0.1";
     portEditingController.text = "8080";
   }
-
-  void openAdminPanel() {
-    Get.to(() => AdminPanelView(adminPanelUrl: adminUrl));
-  }
-
-  String get adminUrl =>
-      "http://${hostnameEditingController.text}:${portEditingController.text}/_/";
 
   void onMenuTap() {
     UI.closeKeyboard();
