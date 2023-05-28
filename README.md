@@ -6,9 +6,7 @@ Pocketbase server app, built using flutter and gomobile
 
 To built for android, first download [pocketbaseMobile.aar](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/pocketbaseMobile.aar) and place in `android/app/libs/`
 
-To built for ios, first download and extract [PocketbaseMobile.xcframework.zip](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/PocketbaseMobile.xcframework.zip) and import this framework in ios from xcode
-
-That's it, built app and use pocketbase_mobile with flutter
+To built for ios, first download and extract [PocketbaseMobile.xcframework.zip](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/PocketbaseMobile.xcframework.zip) and import this framework in ios from xcode, check more instructions [here](https://github.com/rohitsangwan01/pocketbase_mobile/tree/main#native-ios-setup)
 
 ## Features
 
