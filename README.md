@@ -1,16 +1,57 @@
-# pocketbase_mobile_flutter
+# Pocketbase flutter mobile
 
-A new Flutter project.
+Pocketbase server app, built using flutter and gomobile
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To built for android, first download [pocketbaseMobile.aar](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/pocketbaseMobile.aar) and place in `android/app/libs/`
 
-A few resources to get you started if this is your first Flutter project:
+To built for ios, first download and extract [PocketbaseMobile.xcframework.zip](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/PocketbaseMobile.xcframework.zip) and import this framework in ios from xcode
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+That's it, built app and use pocketbase_mobile with flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+Start pocketbaseServer 
+
+```dart
+PocketbaseMobileFlutter.start(
+  hostName: await PocketbaseMobileFlutter.localIpAddress,
+  port: "8080",
+  dataPath: null,
+  enablePocketbaseApiLogs: true,
+);
+```
+
+Stop pocketbaseServer
+
+```dart
+PocketbaseMobileFlutter.stop();
+```
+
+Listen to pocketbaseServer events, setup eventCallback
+
+```dart
+PocketbaseMobileFlutter.setEventCallback(
+    callback: (event, data){
+        // Handle event and data
+    },
+);
+```
+
+Some helper methods
+
+```dart
+// To check if pocketBase is running (not reliable)
+PocketbaseMobileFlutter.isRunning
+
+// To check pocketbaseMobile version
+PocketbaseMobileFlutter.pocketbaseMobileVersion
+
+// To get the ipAddress of mobile ( to run pocketbase with this hostname )
+PocketbaseMobileFlutter.localIpAddress
+```
+
+## Note
+
+Api's might change, or i might convert this project into a flutter plugin, once this will be stable, feel free to Contribute or Report any Bug!
