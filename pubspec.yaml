@@ -12,12 +12,24 @@ dependencies:
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+  app_rename: ^0.0.1
   flutter_test: 
     sdk: flutter
 
 get_cli: 
   sub_folder: false
 
+# flutter pub run flutter_launcher_icons
+# flutter pub run app_rename:main all="Pocketbase Mobile"
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon.jpg"
+
+
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/
 
