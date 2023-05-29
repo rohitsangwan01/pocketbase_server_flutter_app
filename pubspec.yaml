@@ -27,12 +27,23 @@ dependency_overrides:
 dev_dependencies: 
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.13.1
-  app_rename: ^0.0.1
+  package_rename: ^1.3.0
   flutter_test: 
     sdk: flutter
 
 get_cli: 
   sub_folder: false
+
+# dart run package_rename
+package_rename_config:
+  android:
+    app_name: "Pocketbase Mobile"
+    package_name: "com.pocketbase.mobile"
+
+  ios:
+    app_name: "Pocketbase Mobile"
+    bundle_name: "com.pocketbase.mobile"
+    package_name: "com.pocketbase.mobile"
 
 flutter_launcher_icons: 
   android: launcher_icon
