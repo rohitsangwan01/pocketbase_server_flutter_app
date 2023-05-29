@@ -1,4 +1,4 @@
-package com.rohit.pocketbase_mobile_flutter
+package com.pocketbase.mobile
 
 import android.Manifest
 import android.content.BroadcastReceiver

@@ -1,4 +1,4 @@
-package com.rohit.pocketbase_mobile_flutter
+package com.pocketbase.mobile
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -78,9 +78,6 @@ class PocketbaseService : Service() {
                 "Stop",
                 stopNotificationPendingIntent
             )
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            notification.priority = NotificationManager.IMPORTANCE_HIGH
-        }
         startForeground(124412, notification.build())
     }
 
@@ -131,7 +128,7 @@ class PocketbaseService : Service() {
         val chan = NotificationChannel(
             "pocketbase_service",
             "Pocketbase Background Service",
-            NotificationManager.IMPORTANCE_HIGH
+            NotificationManager.IMPORTANCE_LOW
         )
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
         val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

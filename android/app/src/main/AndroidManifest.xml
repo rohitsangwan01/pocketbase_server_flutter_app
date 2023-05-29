@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <application android:name="${applicationName}" android:icon="@mipmap/launcher_icon" android:label="Pocketbase Mobile">
+    <application android:name="${applicationName}" 
+        android:icon="@mipmap/launcher_icon"
+        android:usesCleartextTraffic="true"
+        android:label="Pocketbase Mobile">
         <activity android:name=".MainActivity" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:exported="true" android:hardwareAccelerated="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:windowSoftInputMode="adjustResize">
             <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme"/>
             <intent-filter>
