@@ -2,6 +2,9 @@
 
 Pocketbase unofficial server app, built using flutter and gomobile
 
+<!-- ![Get it from iTunes](https://media.lisk.com/init/ios_app_store_a60c851728.png?auto=compress,format&fit=max&w=96&q=80)]()  -->
+[![Get it on Google Play](https://media.lisk.com/init/google_store_912cd733ee.png?auto=compress,format&fit=max&w=96&q=80)](https://play.google.com/store/apps/details?id=com.pocketbase.mobile)
+
 ## Getting Started
 
 To built for android, first download [pocketbaseMobile.aar](https://github.com/rohitsangwan01/pocketbase_mobile/blob/main/pocketbaseMobile.aar) and place in `android/app/libs/`
@@ -63,3 +66,7 @@ PocketbaseMobileFlutter.localIpAddress
 ## Note
 
 Api's might change, or i might convert this project into a flutter plugin, once this will be stable, feel free to Contribute or Report any Bug!
+
+## TODDO
+
+- Upload to App Store
