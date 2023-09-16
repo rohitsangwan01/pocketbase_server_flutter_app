@@ -18,11 +18,6 @@ Make sure to read docs of [pocketbase_server_flutter](https://github.com/rohitsa
 <img src="https://github.com/rohitsangwan01/pocketbase_server_flutter/assets/59526499/4ecd5f1c-ae2b-4406-a10d-0d9ae3e9900e" height="300">
 <img src="https://github.com/rohitsangwan01/pocketbase_server_flutter/assets/59526499/f58f7f5e-d3d0-4328-a8be-f5cf12e15cdb" height="300">
 
-
-## Note
-
-Api's might change, or i might convert this project into a flutter plugin, once this will be stable, feel free to Contribute or Report any Bug!
-
 ## TODO
 
 - Upload to App Store
