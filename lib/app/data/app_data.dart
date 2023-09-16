@@ -8,4 +8,5 @@ class AppUtils {
 
 class AppAssets {
   static const String icon = "assets/icon.jpg";
+  static const String gopherHalf = "assets/gopher_half.png";
 }

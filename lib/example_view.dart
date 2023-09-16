@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocketbase_mobile_flutter/pocketbase_mobile.dart';
+import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,13 +14,13 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    PocketbaseMobileFlutter.isRunning.then(
+    PocketbaseServerFlutter.isRunning.then(
       (value) => setState(() => isServiceRunning = value),
     );
-    PocketbaseMobileFlutter.pocketbaseMobileVersion.then(
+    PocketbaseServerFlutter.pocketbaseMobileVersion.then(
       (value) => _updateText("PocketbaseMobileVersion: $value"),
     );
-    PocketbaseMobileFlutter.setEventCallback(
+    PocketbaseServerFlutter.setEventCallback(
       callback: (event, data) => _updateText("$event: $data"),
     );
     super.initState();
@@ -57,9 +57,9 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        PocketbaseMobileFlutter.start(
+                        PocketbaseServerFlutter.start(
                           hostName:
-                              await PocketbaseMobileFlutter.localIpAddress,
+                              await PocketbaseServerFlutter.localIpAddress,
                           port: "8080",
                           enablePocketbaseApiLogs: true,
                         );
@@ -71,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        await PocketbaseMobileFlutter.stop();
+                        await PocketbaseServerFlutter.stop();
                         setState(() {
                           isServiceRunning = false;
                         });

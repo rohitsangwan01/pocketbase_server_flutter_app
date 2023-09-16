@@ -9,79 +9,77 @@ import '../data/app_data.dart';
 import '../services/storage_service.dart';
 import 'contact_us_view.dart';
 
-class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+class AppDrawer extends Drawer {
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SizedBox(
-        width: Get.width,
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Container(
-                  width: 128.0,
-                  height: 128.0,
-                  margin: const EdgeInsets.only(top: 24.0, bottom: 64.0),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.asset(AppAssets.icon),
+    return Drawer(
+      width: Get.width / 1.2,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Container(
+                width: 128.0,
+                height: 128.0,
+                margin: const EdgeInsets.only(top: 24.0, bottom: 64.0),
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
                 ),
-                const Divider(thickness: 2),
-                DrawerTile(
-                  Icons.link,
-                  "About Pocketbase",
-                  iconColor: Colors.blue,
-                  onTap: () async {
-                    await launchUrl(
-                      Uri.parse(AppUtils.pocketbaseUrl),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                ),
-                Obx(
-                  () => DrawerTile(
-                    Icons.dark_mode,
-                    "Dark Mode",
-                    iconColor: Colors.black,
-                    toggleState: HomeController.to.isDarkMode.value,
-                    onTap: () {
-                      final themeMode = HomeController.to.isDarkMode.value
-                          ? ThemeMode.light
-                          : ThemeMode.dark;
-                      Get.changeThemeMode(themeMode);
-                      HomeController.to.isDarkMode.toggle();
-                      StorageService.to.isDarkMode =
-                          HomeController.to.isDarkMode.value;
-                    },
-                  ),
-                ),
-                DrawerTile(
-                  Icons.share,
-                  "Share App",
-                  iconColor: Colors.red,
+                child: Image.asset(AppAssets.icon),
+              ),
+              const Divider(thickness: 2),
+              DrawerTile(
+                Icons.link,
+                "About Pocketbase",
+                iconColor: Colors.blue,
+                onTap: () async {
+                  await launchUrl(
+                    Uri.parse(AppUtils.pocketbaseUrl),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+              ),
+              Obx(
+                () => DrawerTile(
+                  Icons.dark_mode,
+                  "Dark Mode",
+                  iconColor: Colors.black,
+                  toggleState: HomeController.to.isDarkMode.value,
                   onTap: () {
-                    String shareMessage =
-                        "Check out ${AppUtils.appName}! \n${AppUtils.appDescription} \n${AppUtils.pocketbaseUrl}";
-                    Share.share(shareMessage);
+                    final themeMode = HomeController.to.isDarkMode.value
+                        ? ThemeMode.light
+                        : ThemeMode.dark;
+                    Get.changeThemeMode(themeMode);
+                    HomeController.to.isDarkMode.toggle();
+                    StorageService.to.isDarkMode =
+                        HomeController.to.isDarkMode.value;
                   },
                 ),
-                DrawerTile(
-                  Icons.contact_mail,
-                  "Contact",
-                  iconColor: Colors.green,
-                  onTap: () {
-                    Get.to(() => const ContactUsView());
-                  },
-                ),
-              ],
-            ),
+              ),
+              DrawerTile(
+                Icons.share,
+                "Share App",
+                iconColor: Colors.red,
+                onTap: () {
+                  String shareMessage =
+                      "Check out ${AppUtils.appName}! \n${AppUtils.appDescription} \n${AppUtils.pocketbaseUrl}";
+                  Share.share(shareMessage);
+                },
+              ),
+              DrawerTile(
+                Icons.contact_mail,
+                "Contact",
+                iconColor: Colors.green,
+                onTap: () {
+                  Get.to(() => const ContactUsView());
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -110,10 +108,7 @@ class DrawerTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 18.0, top: 2.0),
       child: ListTile(
-        onTap: () {
-          HomeController.to.onMenuTap();
-          onTap?.call();
-        },
+        onTap: onTap,
         leading: Icon(
           iconData,
           color: iconColor,
