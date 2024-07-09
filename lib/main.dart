@@ -1,23 +1,26 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pocketbase_mobile_flutter/app/data/app_data.dart';
+import 'package:pocketbase_mobile_flutter/app/views/home_view.dart';
 
-import 'app/routes/app_pages.dart';
-import 'app/services/storage_service.dart';
-
-/// Checkout `example.dart` for a simple example
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Get.putAsync(() => StorageService().init());
-
   runApp(
-    GetMaterialApp(
-      title: "Pocketbase Mobile",
+    const MyApp(),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: AppUtils.appName,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+      home: const HomeView(),
       theme: FlexThemeData.light(
         scheme: FlexScheme.aquaBlue,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -49,8 +52,7 @@ void main() async {
         swapLegacyOnMaterial3: true,
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
-      themeMode:
-          StorageService.to.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-    ),
-  );
+      themeMode: ThemeMode.system,
+    );
+  }
 }

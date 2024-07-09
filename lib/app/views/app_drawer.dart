@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'package:pocketbase_mobile_flutter/app/modules/home/home_controller.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../data/app_data.dart';
-import '../services/storage_service.dart';
 import 'contact_us_view.dart';
 
 class AppDrawer extends Drawer {
@@ -15,7 +12,7 @@ class AppDrawer extends Drawer {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: Get.width / 1.2,
+      width: MediaQuery.sizeOf(context).width / 1.2,
       backgroundColor: Theme.of(context).secondaryHeaderColor,
       child: SafeArea(
         child: SingleChildScrollView(
@@ -44,23 +41,6 @@ class AppDrawer extends Drawer {
                   );
                 },
               ),
-              Obx(
-                () => DrawerTile(
-                  Icons.dark_mode,
-                  "Dark Mode",
-                  iconColor: Colors.black,
-                  toggleState: HomeController.to.isDarkMode.value,
-                  onTap: () {
-                    final themeMode = HomeController.to.isDarkMode.value
-                        ? ThemeMode.light
-                        : ThemeMode.dark;
-                    Get.changeThemeMode(themeMode);
-                    HomeController.to.isDarkMode.toggle();
-                    StorageService.to.isDarkMode =
-                        HomeController.to.isDarkMode.value;
-                  },
-                ),
-              ),
               DrawerTile(
                 Icons.share,
                 "Share App",
@@ -76,7 +56,24 @@ class AppDrawer extends Drawer {
                 "Contact",
                 iconColor: Colors.green,
                 onTap: () {
-                  Get.to(() => const ContactUsView());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ContactUsView()),
+                  );
+                },
+              ),
+              DrawerTile(
+                Icons.info,
+                "About App",
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AboutDialog(
+                      applicationName: AppUtils.appName,
+                      applicationLegalese: "© 2024 ${AppUtils.appName}",
+                    ),
+                  );
                 },
               ),
             ],

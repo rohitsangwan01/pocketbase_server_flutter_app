@@ -1,12 +1,12 @@
 import 'package:contactus/contactus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pocketbase_mobile_flutter/app/data/app_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ContactUsView extends GetView {
-  const ContactUsView({Key? key}) : super(key: key);
+class ContactUsView extends StatelessWidget {
+  const ContactUsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +29,11 @@ class ContactUsView extends GetView {
                 taglineFontWeight: FontWeight.w300,
                 dividerThickness: 2,
                 githubUserName: 'rohitsangwan01',
-                linkedinURL:
-                    'https://www.linkedin.com/in/rohit-sangwan-5282761b3/',
                 instagram: "rohit.sangwan01",
-                textColor: Theme.of(context).colorScheme.onBackground,
-                cardColor: Theme.of(context).colorScheme.background,
-                taglineColor: Theme.of(context).colorScheme.onBackground,
-                companyColor: Theme.of(context).colorScheme.onBackground,
+                textColor: Theme.of(context).colorScheme.onSurface,
+                cardColor: Theme.of(context).colorScheme.surface,
+                taglineColor: Theme.of(context).colorScheme.onSurface,
+                companyColor: Theme.of(context).colorScheme.onSurface,
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
