@@ -1,7 +1,7 @@
 name: pocketbase_mobile_flutter
-version: 1.0.2+2
+version: 1.0.3+3
 publish_to: none
-description: A new Flutter project.
+description: Pocketbase Server App
 environment: 
   sdk: '>=3.0.1 <4.0.0'
 
