@@ -29,7 +29,6 @@ class ContactUsView extends StatelessWidget {
                 taglineFontWeight: FontWeight.w300,
                 dividerThickness: 2,
                 githubUserName: 'rohitsangwan01',
-                instagram: "rohit.sangwan01",
                 textColor: Theme.of(context).colorScheme.onSurface,
                 cardColor: Theme.of(context).colorScheme.surface,
                 taglineColor: Theme.of(context).colorScheme.onSurface,
