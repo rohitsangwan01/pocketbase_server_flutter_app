@@ -1,32 +1,32 @@
 name: pocketbase_mobile_flutter
-version: 1.0.3+3
+version: 1.0.4+4
 publish_to: none
 description: Pocketbase Server App
-environment: 
-  sdk: '>=3.0.1 <4.0.0'
+environment:
+  sdk: ">=3.0.1 <4.0.0"
 
-dependencies: 
-  flutter: 
+dependencies:
+  flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  flex_color_scheme: ^7.3.1
+  flex_color_scheme: ^8.2.0
   google_fonts: ^6.2.1
-  flutter_inappwebview: ^6.0.0
-  upgrader: ^10.3.0
+  flutter_inappwebview: ^6.1.5
+  upgrader: ^11.4.0
   contactus: ^1.2.3
-  share_plus: ^9.0.0
-  url_launcher: ^6.3.0
-  pocketbase_server_flutter: ^0.0.1
+  share_plus: ^11.0.0
+  url_launcher: ^6.3.2
+  network_info_plus: ^6.1.4
+  path_provider: ^2.1.5
+  pocketbase_server_flutter: ^1.1.0
+  shared_preferences: ^2.5.3
 
-dev_dependencies: 
-  flutter_lints: ^4.0.0
-  flutter_launcher_icons: ^0.13.1
-  package_rename: ^1.7.0
-  flutter_test: 
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  package_rename: ^1.10.0
+  flutter_test:
     sdk: flutter
-
-get_cli: 
-  sub_folder: false
 
 # dart run package_rename
 package_rename_config:
@@ -39,13 +39,12 @@ package_rename_config:
     bundle_name: "com.pocketbase.mobile"
     package_name: "com.pocketbase.mobile"
 
-flutter_launcher_icons: 
+flutter_launcher_icons:
   android: launcher_icon
   image_path: assets/icon.jpg
   ios: true
 
-flutter: 
-  assets: 
+flutter:
+  assets:
     - assets/
   uses-material-design: true
-

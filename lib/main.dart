@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pocketbase_mobile_flutter/app/data/app_data.dart';
+import 'package:pocketbase_mobile_flutter/app/data/storage_service.dart';
 import 'package:pocketbase_mobile_flutter/app/views/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await StorageService.instance.init();
   runApp(
     const MyApp(),
   );

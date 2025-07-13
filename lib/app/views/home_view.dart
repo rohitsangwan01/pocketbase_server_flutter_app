@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:network_info_plus/network_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:pocketbase_mobile_flutter/app/data/app_data.dart';
+import 'package:pocketbase_mobile_flutter/app/data/storage_service.dart';
 import 'package:pocketbase_mobile_flutter/app/views/admin_panel_view.dart';
 import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
 import 'package:upgrader/upgrader.dart';
@@ -16,12 +19,17 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final StorageService _storage = StorageService.instance;
+
   bool _isRunning = false;
   String _logs = "Pocketbase logs: \n";
   bool _enablePocketbaseApiLogs = true;
+  late String _cachePath;
 
   final _hostnameEditingController = TextEditingController();
   final _portEditingController = TextEditingController();
+  final _adminUsernameEditingController = TextEditingController();
+  final _adminPasswordEditingController = TextEditingController();
 
   String get _adminUrl =>
       "http://${_hostnameEditingController.text}:${_portEditingController.text}/_/";
@@ -47,10 +55,16 @@ class _HomeViewState extends State<HomeView> {
         }
       },
     );
-    _isRunning = await PocketbaseServerFlutter.isRunning;
-    _hostnameEditingController.text =
-        await PocketbaseServerFlutter.localIpAddress ?? "127.0.0.1";
+
+    _isRunning = await PocketbaseServerFlutter.isRunning ?? false;
+    final info = NetworkInfo();
+    String? localIp = await info.getWifiIP();
+    _cachePath = (await getApplicationCacheDirectory()).path;
+
+    _hostnameEditingController.text = localIp ?? "127.0.0.1";
     _portEditingController.text = "8080";
+    _adminUsernameEditingController.text = _storage.adminUsername;
+    _adminPasswordEditingController.text = _storage.adminPassword;
     setState(() {});
   }
 
@@ -61,15 +75,23 @@ class _HomeViewState extends State<HomeView> {
       return;
     }
     try {
-      await PocketbaseServerFlutter.start(
-        hostName: _hostnameEditingController.text,
-        port: _portEditingController.text,
-        enablePocketbaseApiLogs: _enablePocketbaseApiLogs,
-      );
       setState(() {
         _isRunning = true;
       });
+      await PocketbaseServerFlutter.start(
+        superUserEmail: _adminUsernameEditingController.text,
+        superUserPassword: _adminPasswordEditingController.text,
+        hostName: _hostnameEditingController.text,
+        port: _portEditingController.text,
+        enablePocketbaseApiLogs: _enablePocketbaseApiLogs,
+        dataPath: _cachePath,
+      );
+      _storage.adminUsername = _adminUsernameEditingController.text;
+      _storage.adminPassword = _adminPasswordEditingController.text;
     } catch (e) {
+      setState(() {
+        _isRunning = false;
+      });
       String errorMessage = e.toString();
       if (e is PlatformException) {
         errorMessage = e.message ?? e.toString();
@@ -163,28 +185,77 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
-              TextFormField(
-                controller: _hostnameEditingController,
-                autofocus: false,
-                decoration: const InputDecoration(
-                  hintText: "Hostname",
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: _hostnameEditingController,
+                      autofocus: false,
+                      decoration: const InputDecoration(
+                        hintText: "Hostname",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3),
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
                   ),
-                  border: OutlineInputBorder(),
-                ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _portEditingController,
+                      autofocus: false,
+                      decoration: const InputDecoration(
+                        hintText: "Port",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3),
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _portEditingController,
-                autofocus: false,
-                decoration: const InputDecoration(
-                  hintText: "Port",
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3),
+              const Divider(),
+              Text(
+                "Super User Credentials",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                "You can change these credentials later from the admin panel",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: _adminUsernameEditingController,
+                      autofocus: false,
+                      decoration: const InputDecoration(
+                        hintText: "Username",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3),
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
                   ),
-                  border: OutlineInputBorder(),
-                ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _adminPasswordEditingController,
+                      autofocus: false,
+                      decoration: const InputDecoration(
+                        hintText: "Password",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 3),
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const Divider(),
               Row(
