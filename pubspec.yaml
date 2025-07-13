@@ -39,12 +39,8 @@ package_rename_config:
     bundle_name: "com.pocketbase.mobile"
     package_name: "com.pocketbase.mobile"
 
-flutter_launcher_icons:
-  android: launcher_icon
-  image_path: assets/icon.jpg
-  ios: true
-
 flutter:
+  uses-material-design: true
   assets:
     - assets/
-  uses-material-design: true
+    - assets/icon/

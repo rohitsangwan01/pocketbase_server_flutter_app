@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 10,
           blendOnColors: false,
-          useTextTheme: true,
           useM2StyleDividerInM3: true,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
         tertiary: const Color(0xff2a3c3c),
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 20,
-          useTextTheme: true,
           useM2StyleDividerInM3: true,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
